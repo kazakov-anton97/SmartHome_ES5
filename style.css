@@ -1,0 +1,13 @@
+.aircond {
+   padding: 5px;
+   border: 2px solid black;
+   width: 150px;
+}
+
+.on {
+   background-color: green;
+}
+
+.off {
+   background-color: red;
+}
