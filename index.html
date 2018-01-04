@@ -3,15 +3,23 @@
    <head>
       <title>Smart Home</title>
       <meta charset="utf-8" />
+      <link rel="icon" href="./favicon.ico" type="image/x-icon">
       <link rel="stylesheet" type="text/css" href="./style.css" />
    </head>
    <body>
-      
-      <div id="root"></div>
+      <div id="root"><img src="media/smart-house.jpg" class="img"> </div>
+      <button id="add">Добавить кондиционер</button><br>
+      <button id="addCam">Добавить камеру</button><br>
+      <button id="addTherm">Добавить термостат</button><br>
+      <button id="delete">Удалить</button>
       <script src="./models/deviceCollection.js"></script>
       <script src="./models/baseDevice.js"></script>
       <script src="./models/AirConditioner.js"></script>
-      <script src="./view.js"></script>
-   
+      <script src="./models/Camera.js"></script>
+      <script src="./models/Thermostat.js"></script>
+      <script src="./viewAirConditioner.js"></script>
+      <script src="./viewCamera.js"></script>
+      <script src="./viewThermostat.js"></script>
+      <script src="./render.js"></script>
    </body>
 </html>

@@ -1,6 +1,6 @@
 "use strict";
 
-class AirConditioner extends baseDevice {
+class AirConditioner extends BaseDevice {
 	constructor(model, currentTemp) {
 		super(model);
 		this._currentTemp = 0;

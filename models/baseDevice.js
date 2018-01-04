@@ -1,6 +1,6 @@
 "use strict";
 
-class baseDevice {
+class BaseDevice {
 	constructor(model) {
 		this._state = false;
 		this._model = model;

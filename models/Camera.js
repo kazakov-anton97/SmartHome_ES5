@@ -1,17 +1,33 @@
 "use strict";
 
-class Camera extends baseDevice {
+class Camera extends BaseDevice {
 	constructor(model, status, mode) {
 		super(model);
-		this._status = live;
-		this._mode = day;
+		this._status = status;
+		this._mode = mode;
 	}
 
-	changeStatus() {
-		this._status = record;
+	liveStatus() {
+		this._status = "live";
 	}
 
-	changeMode() {
-		this._mode = night;
+	recordStatus() {
+		this._status = "record";
+	}
+
+	dayMode() {
+		this._mode = "day";
+	}
+
+	nightMode() {
+		this._mode = "night";
+	}
+
+	get status() {
+		return this._status;
+	}
+
+	get mode() {
+		return this._mode;
 	}
 }

@@ -1,6 +1,6 @@
 "use strict";
 
-class ViewAirConditioner extends baseDevice {
+class ViewAirConditioner extends BaseDevice {
    constructor(aircond, rootElement) {
       super(aircond);
       this._aircond = aircond;
@@ -13,6 +13,10 @@ class ViewAirConditioner extends baseDevice {
    }
    
    render() {
+
+      let name = document.createElement("div");
+      name.innerText = "AirConditioner";
+
       let aircond = document.createElement("div");
       aircond.className = "aircond";
       
@@ -59,6 +63,7 @@ class ViewAirConditioner extends baseDevice {
       });
       
       this.stateChange();
+      aircond.appendChild(name);
       aircond.appendChild(this._state);
       aircond.appendChild(temp);
       aircond.appendChild(model);
@@ -66,11 +71,7 @@ class ViewAirConditioner extends baseDevice {
       aircond.appendChild(offBtn);
       aircond.appendChild(incTemp);
       aircond.appendChild(decTemp);
-      this._rootElement.innerHTML = "";
+      //this._rootElement.innerHTML = "";
       this._rootElement.appendChild(aircond);
    }
 }
-
-let f = new AirConditioner("LG");
-let vf = new ViewAirConditioner(f, document.getElementById("root"));
-vf.render();

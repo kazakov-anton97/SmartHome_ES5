@@ -1,13 +1,61 @@
+body {
+   background-color: #D8BFD8;
+}
+
 .aircond {
+   margin-left: 5px;
    padding: 5px;
    border: 2px solid black;
    width: 150px;
+   display: inline-block;
+}
+
+.camera {
+   padding: 5px;
+   margin-left: 5px;
+   border: 2px solid black;
+   width: 150px;
+   display: inline-block;
+}
+
+.thermostat {
+   padding: 5px;
+   margin-left: 5px;
+   border: 2px solid black;
+   width: 150px;
+   display: inline-block;
 }
 
 .on {
-   background-color: green;
+   background-color: #9ACD32;
+   border-radius: 10px;
+   margin: 5px;
 }
 
 .off {
-   background-color: red;
+   background-color: #CD5C5C;
+   border-radius: 10px;
+   margin: 5px;
 }
+
+#add, #addCam, #addTherm, #delete{
+   margin: 5px;
+   position: relative;
+   display: inline-block;
+   border-radius: 10px;
+   background-color: #AFEEEE;
+}
+
+.img {
+   position: relative;
+   margin: 0 auto;
+   display: block;
+   width: 50%;
+   height: 50%;
+   margin-bottom: 10px;
+   border: 4px solid black;
+   border-radius: 10px;
+}
+
+
+
