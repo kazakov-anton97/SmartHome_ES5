@@ -1,33 +1,32 @@
-"use strict";
+var Camera = function Camera(model, status, mode) {
+	BaseDevice.call(this, model);
+	this._status = status;
+	this._mode = mode;
 
-class Camera extends BaseDevice {
-	constructor(model, status, mode) {
-		super(model);
-		this._status = status;
-		this._mode = mode;
-	}
+	Camera.prototype = Object.create(BaseDevice.prototype);
+	Camera.prototype.constructor = Camera;
 
-	liveStatus() {
+	Camera.prototype.liveStatus = function () {
 		this._status = "live";
-	}
+	};
 
-	recordStatus() {
+	Camera.prototype.recordStatus = function () {
 		this._status = "record";
-	}
+	};
 
-	dayMode() {
+	Camera.prototype.dayMode = function () {
 		this._mode = "day";
-	}
+	};
 
-	nightMode() {
+	Camera.prototype.nightMode = function () {
 		this._mode = "night";
-	}
+	};
 
-	get status() {
+	Camera.prototype.getStatus = function () {
 		return this._status;
-	}
+	};
 
-	get mode() {
+	Camera.prototype.getMode = function () {
 		return this._mode;
-	}
+	};
 }

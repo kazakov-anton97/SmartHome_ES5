@@ -1,22 +1,20 @@
-"use strict";
+var BaseDevice = function BaseDevice(model) {
+	this._state = false;
+	this._model = model;
 
-class BaseDevice {
-	constructor(model) {
-		this._state = false;
-		this._model = model;
-	}
-
-	on() {
+	BaseDevice.prototype.on = function () {
 		this._state = true;
-	}
-	off() {
-		this._state = false;
-	}
-	get state() {
-		return this._state;
-	}
+	};
 
-	get model() {
+	BaseDevice.prototype.off = function () {
+		this._state = false;
+	};
+
+	BaseDevice.prototype.getState = function () {
+		return this._state;
+	};
+
+	BaseDevice.prototype.getModel = function () {
 		return this._model;
-	}
+	};
 }

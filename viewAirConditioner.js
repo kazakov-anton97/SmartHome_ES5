@@ -1,65 +1,60 @@
-"use strict";
-
-class ViewAirConditioner extends BaseDevice {
-   constructor(aircond, rootElement) {
-      super(aircond);
+var ViewAirConditioner = function (aircond, rootElement) {
       this._aircond = aircond;
       this._rootElement = rootElement;
       this._state = document.createElement("div");
-   }
    
-   stateChange() {
-      this._state.innerText = `Состояние: ${this._aircond.state ? "вкл." : "выкл."}`;
-   }
+   ViewAirConditioner.prototype.stateChange = function () {
+      this._state.innerText = "Состояние: " + this._aircond._state ? "вкл." : "выкл.";
+   };
    
-   render() {
+   ViewAirConditioner.prototype.render = function () {
 
-      let name = document.createElement("div");
+      var name = document.createElement("div");
       name.innerText = "AirConditioner";
 
-      let aircond = document.createElement("div");
+      var aircond = document.createElement("div");
       aircond.className = "aircond";
       
-      let temp = document.createElement("div");
-      temp.innerText = `Темп.: ${this._aircond.currentTemp}`;
+      var temp = document.createElement("div");
+      temp.innerText = "Темп.: " + this._aircond._currentTemp;
       
-      let model = document.createElement("div");
-      model.innerText = `Модель: ${this._aircond.model}`;
+      var model = document.createElement("div");
+      model.innerText = "Модель: " + this._aircond._model;
       
-      let onBtn = document.createElement("button");
-      onBtn.type = "button";
-      onBtn.innerHTML = "Вкл.";
-      onBtn.className = "on";
-      onBtn.addEventListener("click", () => {
+      this._onBtn = document.createElement("button");
+      this._onBtn.type = "button";
+      this._onBtn.innerHTML = "Вкл.";
+      this._onBtn.className = "on";
+      this._onBtn.addEventListener("click", function () {
          this._aircond.on();
          this.stateChange();
       });
       
-      let offBtn = document.createElement("button");
-      offBtn.type = "button";
-      offBtn.innerHTML = "Выкл.";
-      offBtn.className = "off";
-      offBtn.addEventListener("click", () => {
+      this._offBtn = document.createElement("button");
+      this._offBtn.type = "button";
+      this._offBtn.innerHTML = "Выкл.";
+      this._offBtn.className = "off";
+      this._offBtn.addEventListener("click", function () {
          this._aircond.off();
          this.stateChange();
       });
 
-      let incTemp = document.createElement("button");
-      incTemp.type = "button";
-      incTemp.innerHTML = "Теплее";
-      incTemp.className = "on";
-      incTemp.addEventListener("click", () => {
+      this._incTemp = document.createElement("button");
+      this._incTemp.type = "button";
+      this._incTemp.innerHTML = "Теплее";
+      this._incTemp.className = "on";
+      this._incTemp.addEventListener("click", function () {
          this._aircond.increaseTemp();
-         temp.innerText = `Темп.: ${this._aircond.currentTemp}`;
+         this._temp.innerText = "Темп.: " + this._aircond.currentTemp;
       });
 
-      let decTemp = document.createElement("button");
-      decTemp.type = "button";
-      decTemp.innerHTML = "Холоднее";
-      decTemp.className = "off";
-      decTemp.addEventListener("click", () => {
+      this._decTemp = document.createElement("button");
+      this._decTemp.type = "button";
+      this._decTemp.innerHTML = "Холоднее";
+      this._decTemp.className = "off";
+      this._decTemp.addEventListener("click", function () {
          this._aircond.decreaseTemp();
-         temp.innerText = `Темп.: ${this._aircond.currentTemp}`;
+         this._temp.innerText = "Темп.: " + this._aircond.currentTemp;
       });
       
       this.stateChange();
@@ -67,11 +62,11 @@ class ViewAirConditioner extends BaseDevice {
       aircond.appendChild(this._state);
       aircond.appendChild(temp);
       aircond.appendChild(model);
-      aircond.appendChild(onBtn);
-      aircond.appendChild(offBtn);
-      aircond.appendChild(incTemp);
-      aircond.appendChild(decTemp);
+      aircond.appendChild(this._onBtn);
+      aircond.appendChild(this._offBtn);
+      aircond.appendChild(this._incTemp);
+      aircond.appendChild(this._decTemp);
       //this._rootElement.innerHTML = "";
       this._rootElement.appendChild(aircond);
-   }
+   };
 }

@@ -1,18 +1,17 @@
-"use strict";
+var Thermostat = function Thermostat(model, currentTemp) {
+	BaseDevice.call(this, model);
+	this._currentTemp = 12;
 
-class Thermostat extends BaseDevice {
-	constructor(model, currentTemp) {
-		super(model);
-		this._currentTemp = 12;
-	}
+	Thermostat.prototype = Object.create(BaseDevice.prototype);
+	Thermostat.prototype.constructor = Thermostat;
 
-	showTemp() {
+	Thermostat.prototype.showTemp = function () {
 		if (this._state == true) {
 			this._currentTemp = 22;
 		}
-	}
+	};
 
-	get currentTemp() {
+	Thermostat.prototype.getCurrentTemp = function () {
 		return this._currentTemp;
-	}
+	};
 }

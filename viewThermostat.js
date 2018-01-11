@@ -1,58 +1,53 @@
-"use strict";
-
-class ViewThermostat extends BaseDevice {
-   constructor(thermos, rootElement) {
-      super(thermos);
+var ViewThermostat = function (thermos, rootElement) {
       this._thermos = thermos;
       this._rootElement = rootElement;
       this._state = document.createElement("div");
-   }
-   
-   stateChange() {
-      this._state.innerText = `Состояние: ${this._thermos.state ? "вкл." : "выкл."}`;
-   }
-   
-   render() {
 
-      let name = document.createElement("div");
-      name.innerText = "Thermostat";
+  ViewThermostat.prototype.stateChange = function () {
+         this._state.innerText = "Состояние: " + (this._thermos._state ? "вкл." : "выкл.");
+      };
 
-      let thermos = document.createElement("div");
-      thermos.className = "thermostat";
-      
-      let temp = document.createElement("div");
-      temp.innerText = `Темп.: ${this._thermos.currentTemp}`;
-      
-      let model = document.createElement("div");
-      model.innerText = `Модель: ${this._thermos.model}`;
-      
-      let onBtn = document.createElement("button");
-      onBtn.type = "button";
-      onBtn.innerHTML = "Вкл.";
-      onBtn.className = "on";
-      onBtn.addEventListener("click", () => {
-         this._thermos.on();
+   ViewThermostat.prototype.render = function () {
+
+         var name = document.createElement("div");
+         name.innerText = "Thermostat";
+
+         var thermos = document.createElement("div");
+         thermos.className = "thermostat";
+
+         var temp = document.createElement("div");
+         temp.innerText = "Темп.: " + this._thermos._currentTemp;
+
+         var model = document.createElement("div");
+         model.innerText = "Модель: " + this._thermos._model;
+
+         this._onBtn = document.createElement("button");
+         this._onBtn.type = "button";
+         this._onBtn.innerHTML = "Вкл.";
+         this._onBtn.className = "on";
+         this._onBtn.addEventListener("click", function () {
+            this._thermos.on();
+            this.stateChange();
+            this.showTemp();
+         });
+
+         this._offBtn = document.createElement("button");
+         this._offBtn.type = "button";
+         this._offBtn.innerHTML = "Выкл.";
+         this._offBtn.className = "off";
+         this._offBtn.addEventListener("click", function () {
+            this._thermos.off();
+            this.stateChange();
+         });
+
          this.stateChange();
-         this.showTemp();
-      });
-      
-      let offBtn = document.createElement("button");
-      offBtn.type = "button";
-      offBtn.innerHTML = "Выкл.";
-      offBtn.className = "off";
-      offBtn.addEventListener("click", () => {
-         this._thermos.off();
-         this.stateChange();
-      });
-      
-      this.stateChange();
-      thermos.appendChild(name);
-      thermos.appendChild(this._state);
-      thermos.appendChild(temp);
-      thermos.appendChild(model);
-      thermos.appendChild(onBtn);
-      thermos.appendChild(offBtn);
-      //this._rootElement.innerHTML = "";
-      this._rootElement.appendChild(thermos);
-   }
+         thermos.appendChild(name);
+         thermos.appendChild(this._state);
+         thermos.appendChild(temp);
+         thermos.appendChild(model);
+         thermos.appendChild(this._onBtn);
+         thermos.appendChild(this._offBtn);
+         //this._rootElement.innerHTML = "";
+         this._rootElement.appendChild(thermos);
+      };
 }
