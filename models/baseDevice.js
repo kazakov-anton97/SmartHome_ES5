@@ -1,6 +1,7 @@
-var BaseDevice = function BaseDevice(model) {
+function BaseDevice(model) {
 	this._state = false;
 	this._model = model;
+}
 
 	BaseDevice.prototype.on = function () {
 		this._state = true;
@@ -16,5 +17,4 @@ var BaseDevice = function BaseDevice(model) {
 
 	BaseDevice.prototype.getModel = function () {
 		return this._model;
-	};
-}
+	}

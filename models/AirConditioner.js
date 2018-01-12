@@ -1,6 +1,7 @@
-var AirConditioner = function AirConditioner(model, currentTemp) {
+function AirConditioner(model, currentTemp) {
 	BaseDevice.call(this, model);
 	this._currentTemp = 0;
+}
 
 	AirConditioner.prototype = Object.create(BaseDevice.prototype);
 	AirConditioner.prototype.constructor = AirConditioner;
@@ -19,5 +20,4 @@ var AirConditioner = function AirConditioner(model, currentTemp) {
 
 	AirConditioner.prototype.getCurrentTemp = function () {
 		return this._currentTemp;
-	};
-}
+	}

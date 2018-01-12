@@ -1,10 +1,14 @@
-var ViewAirConditioner = function (aircond, rootElement) {
+function ViewAirConditioner(aircond, rootElement) {
       this._aircond = aircond;
       this._rootElement = rootElement;
       this._state = document.createElement("div");
+   }
    
+   ViewAirConditioner.prototype = Object.create(BaseDevice.prototype);
+   ViewAirConditioner.prototype.constructor = ViewAirConditioner;
+
    ViewAirConditioner.prototype.stateChange = function () {
-      this._state.innerText = "Состояние: " + this._aircond._state ? "вкл." : "выкл.";
+      this._state.innerText = `Состояние: ${this._aircond._state ? "вкл." : "выкл."}`;
    };
    
    ViewAirConditioner.prototype.render = function () {
@@ -21,40 +25,40 @@ var ViewAirConditioner = function (aircond, rootElement) {
       var model = document.createElement("div");
       model.innerText = "Модель: " + this._aircond._model;
       
-      this._onBtn = document.createElement("button");
-      this._onBtn.type = "button";
-      this._onBtn.innerHTML = "Вкл.";
-      this._onBtn.className = "on";
-      this._onBtn.addEventListener("click", function () {
+      var onBtn = document.createElement("button");
+      onBtn.type = "button";
+      onBtn.innerHTML = "Вкл.";
+      onBtn.className = "on";
+      onBtn.addEventListener("click", () => {
          this._aircond.on();
          this.stateChange();
       });
       
-      this._offBtn = document.createElement("button");
-      this._offBtn.type = "button";
-      this._offBtn.innerHTML = "Выкл.";
-      this._offBtn.className = "off";
-      this._offBtn.addEventListener("click", function () {
+      var offBtn = document.createElement("button");
+      offBtn.type = "button";
+      offBtn.innerHTML = "Выкл.";
+      offBtn.className = "off";
+      offBtn.addEventListener("click", () => {
          this._aircond.off();
          this.stateChange();
       });
 
-      this._incTemp = document.createElement("button");
-      this._incTemp.type = "button";
-      this._incTemp.innerHTML = "Теплее";
-      this._incTemp.className = "on";
-      this._incTemp.addEventListener("click", function () {
+      var incTemp = document.createElement("button");
+      incTemp.type = "button";
+      incTemp.innerHTML = "Теплее";
+      incTemp.className = "on";
+      incTemp.addEventListener("click", () => {
          this._aircond.increaseTemp();
-         this._temp.innerText = "Темп.: " + this._aircond.currentTemp;
+         temp.innerText = `Темп.: ${this._aircond._currentTemp}`;
       });
 
-      this._decTemp = document.createElement("button");
-      this._decTemp.type = "button";
-      this._decTemp.innerHTML = "Холоднее";
-      this._decTemp.className = "off";
-      this._decTemp.addEventListener("click", function () {
+      var decTemp = document.createElement("button");
+      decTemp.type = "button";
+      decTemp.innerHTML = "Холоднее";
+      decTemp.className = "off";
+      decTemp.addEventListener("click", () => {
          this._aircond.decreaseTemp();
-         this._temp.innerText = "Темп.: " + this._aircond.currentTemp;
+         temp.innerText = `Темп.: ${this._aircond._currentTemp}`;
       });
       
       this.stateChange();
@@ -62,11 +66,9 @@ var ViewAirConditioner = function (aircond, rootElement) {
       aircond.appendChild(this._state);
       aircond.appendChild(temp);
       aircond.appendChild(model);
-      aircond.appendChild(this._onBtn);
-      aircond.appendChild(this._offBtn);
-      aircond.appendChild(this._incTemp);
-      aircond.appendChild(this._decTemp);
-      //this._rootElement.innerHTML = "";
+      aircond.appendChild(onBtn);
+      aircond.appendChild(offBtn);
+      aircond.appendChild(incTemp);
+      aircond.appendChild(decTemp);
       this._rootElement.appendChild(aircond);
-   };
 }

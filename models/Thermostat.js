@@ -1,6 +1,7 @@
-var Thermostat = function Thermostat(model, currentTemp) {
+function Thermostat(model, currentTemp) {
 	BaseDevice.call(this, model);
 	this._currentTemp = 12;
+}
 
 	Thermostat.prototype = Object.create(BaseDevice.prototype);
 	Thermostat.prototype.constructor = Thermostat;
@@ -13,5 +14,4 @@ var Thermostat = function Thermostat(model, currentTemp) {
 
 	Thermostat.prototype.getCurrentTemp = function () {
 		return this._currentTemp;
-	};
-}
+	}

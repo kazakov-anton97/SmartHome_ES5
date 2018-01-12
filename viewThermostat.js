@@ -2,9 +2,13 @@ var ViewThermostat = function (thermos, rootElement) {
       this._thermos = thermos;
       this._rootElement = rootElement;
       this._state = document.createElement("div");
+}
+
+   ViewThermostat.prototype = Object.create(BaseDevice.prototype);
+   ViewThermostat.prototype.constructor = ViewThermostat;
 
   ViewThermostat.prototype.stateChange = function () {
-         this._state.innerText = "Состояние: " + (this._thermos._state ? "вкл." : "выкл.");
+         this._state.innerText = `Состояние: ${this._thermos._state ? "вкл." : "выкл."}`;
       };
 
    ViewThermostat.prototype.render = function () {
@@ -21,21 +25,20 @@ var ViewThermostat = function (thermos, rootElement) {
          var model = document.createElement("div");
          model.innerText = "Модель: " + this._thermos._model;
 
-         this._onBtn = document.createElement("button");
-         this._onBtn.type = "button";
-         this._onBtn.innerHTML = "Вкл.";
-         this._onBtn.className = "on";
-         this._onBtn.addEventListener("click", function () {
+         var onBtn = document.createElement("button");
+         onBtn.type = "button";
+         onBtn.innerHTML = "Вкл.";
+         onBtn.className = "on";
+         onBtn.addEventListener("click", () => {
             this._thermos.on();
             this.stateChange();
-            this.showTemp();
          });
 
-         this._offBtn = document.createElement("button");
-         this._offBtn.type = "button";
-         this._offBtn.innerHTML = "Выкл.";
-         this._offBtn.className = "off";
-         this._offBtn.addEventListener("click", function () {
+         var offBtn = document.createElement("button");
+         offBtn.type = "button";
+         offBtn.innerHTML = "Выкл.";
+         offBtn.className = "off";
+         offBtn.addEventListener("click", () => {
             this._thermos.off();
             this.stateChange();
          });
@@ -45,9 +48,7 @@ var ViewThermostat = function (thermos, rootElement) {
          thermos.appendChild(this._state);
          thermos.appendChild(temp);
          thermos.appendChild(model);
-         thermos.appendChild(this._onBtn);
-         thermos.appendChild(this._offBtn);
-         //this._rootElement.innerHTML = "";
+         thermos.appendChild(onBtn);
+         thermos.appendChild(offBtn);
          this._rootElement.appendChild(thermos);
-      };
 }

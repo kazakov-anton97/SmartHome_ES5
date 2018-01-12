@@ -1,20 +1,23 @@
-var ViewCamera = function (camera, rootElement) {
+function ViewCamera(camera, rootElement) {
    this._camera = camera;
    this._rootElement = rootElement;
    this._state = document.createElement("div");
    this._status = document.createElement("div");
    this._mode = document.createElement("div");
-   
+}
+
+   ViewCamera.prototype = Object.create(BaseDevice.prototype);
+   ViewCamera.prototype.constructor = ViewCamera;
 
    ViewCamera.prototype.stateChange = function () { 
-         this._state.innerText = "Состояние: " + (this._camera._state ? "вкл." : "выкл.");
+         this._state.innerText = `Состояние: ${this._camera._state ? "вкл." : "выкл."}`;
       };
 
    ViewCamera.prototype.statusChange = function () {
-         this._status.innerText = "Статус: " + (this._camera._status ? "record" : "live");
+         this._status.innerText = `Статус: ${this._camera._status ? "record" : "live"}`;
       };
    ViewCamera.prototype.modeChange = function () {
-         this._mode.innerText = "Режим: " + (this._camera._mode ? "day" : "night");
+         this._mode.innerText = `Режим: ${this._camera._mode ? "day" : "night"}`;
       }
    ViewCamera.prototype.render = function () {
 
@@ -33,58 +36,58 @@ var ViewCamera = function (camera, rootElement) {
          var model = document.createElement("div");
          model.innerText = "Модель: " + this._camera._model;
 
-         this._onBtn = document.createElement("button");
-         this._onBtn.type = "button";
-         this._onBtn.innerHTML = "Вкл.";
-         this._onBtn.className = "on";
-         this._onBtn.addEventListener("click", function () {
+         var onBtn = document.createElement("button");
+         onBtn.type = "button";
+         onBtn.innerHTML = "Вкл.";
+         onBtn.className = "on";
+         onBtn.addEventListener("click", () => {
             this._camera.on();
             this.stateChange();
          });
-
-         this._offBtn = document.createElement("button");
-         this._offBtn.type = "button";
-         this._offBtn.innerHTML = "Выкл.";
-         this._offBtn.className = "off";
-         this._offBtn.addEventListener("click", function () {
+      
+         var offBtn = document.createElement("button");
+         offBtn.type = "button";
+         offBtn.innerHTML = "Выкл.";
+         offBtn.className = "off";
+         offBtn.addEventListener("click", () => {
             this._camera.off();
             this.stateChange();
          });
 
-         this._record = document.createElement("button");
-         this._record.type = "button";
-         this._record.innerHTML = "record";
-         this._record.className = "on";
-         this._record.addEventListener("click", function () {
-            this.statusChange();
-            this._camera.recordStatus();
-            status.innerText = "Статус: " + this._camera.status;
+         var record = document.createElement("button");
+         record.type = "button";
+         record.innerHTML = "record";
+         record.className = "on";
+         record.addEventListener("click", () => {
+           this.statusChange();
+           this._camera.recordStatus();
+           status.innerText = `Статус: ${this._camera._status}`;
          });
 
-         this._live = document.createElement("button");
-         this._live.type = "button";
-         this._live.innerHTML = "live";
-         this._live.className = "off";
-         this._live.addEventListener("click", function () {
+         var live = document.createElement("button");
+         live.type = "button";
+         live.innerHTML = "live";
+         live.className = "off";
+         live.addEventListener("click", () => {
             this.statusChange();
             this._camera.liveStatus();
-            status.innerText = "Статус: " + this._camera.status;
+            status.innerText = `Статус: ${this._camera._status}`;
          });
 
-         this._night = document.createElement("button");
-         this._night.type = "button";
-         this._night.innerHTML = "night";
-         this._night.className = "on";
-         this._night.addEventListener("click", function () {
-            this._camera.nightMode();
-            this.modeChange();
+         var night = document.createElement("button");
+         night.type = "button";
+         night.innerHTML = "night";
+         night.className = "on";
+         night.addEventListener("click", () => {
+             this._camera.nightMode();
+             this.modeChange();
          });
 
-         this._day = document.createElement("button");
-         this._day.type = "button";
-         this._day.innerHTML = "day";
-         this._day.className = "off";
-         this._day.addEventListener("click", function () {
+         var day = document.createElement("button");
+         day.type = "button";
+         day.innerHTML = "day";
+         day.className = "off";
+         day.addEventListener("click", () => {
             this._camera.dayMode();
             this.modeChange();
          });
@@ -97,13 +100,11 @@ var ViewCamera = function (camera, rootElement) {
          camera.appendChild(this._status);
          camera.appendChild(this._mode);
          camera.appendChild(model);
-         camera.appendChild(this._onBtn);
-         camera.appendChild(this._offBtn);
-         camera.appendChild(this._record);
-         camera.appendChild(this._live);
-         camera.appendChild(this._night);
-         camera.appendChild(this._day);
-         //this._rootElement.innerHTML = "";
+         camera.appendChild(onBtn);
+         camera.appendChild(offBtn);
+         camera.appendChild(record);
+         camera.appendChild(live);
+         camera.appendChild(night);
+         camera.appendChild(day);
          this._rootElement.appendChild(camera);
-      };
 }

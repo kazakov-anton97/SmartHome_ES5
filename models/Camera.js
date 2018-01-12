@@ -1,7 +1,8 @@
-var Camera = function Camera(model, status, mode) {
+function Camera(model, status, mode) {
 	BaseDevice.call(this, model);
 	this._status = status;
 	this._mode = mode;
+}
 
 	Camera.prototype = Object.create(BaseDevice.prototype);
 	Camera.prototype.constructor = Camera;
@@ -28,5 +29,4 @@ var Camera = function Camera(model, status, mode) {
 
 	Camera.prototype.getMode = function () {
 		return this._mode;
-	};
-}
+	}
